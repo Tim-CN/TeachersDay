@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教师节祝福</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #ffe6f2, #ffcce6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.7;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6699'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-30px) rotate(20deg) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #ffb3d9;
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 102, 153, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(255, 102, 153, 0.8);
+            }
+        }
+        
+        h1 {
+            color: #ff6699;
+            margin-bottom: 25px;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #ff6699, transparent);
+        }
+        
+        .teacher-name {
+            color: #ff6699;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #ffb3d9;
+        }
+        
+        .message-container {
+            margin: 30px 0;
+            padding: 30px;
+            background: linear-gradient(to bottom, #fffafc, #fff5f9);
+            border-radius: 15px;
+            border: 2px solid #ffb3d9;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+        
+        .message {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+            min-height: 150px;
+        }
+        
+        .typed-cursor {
+            display: inline;
+            animation: blink 0.7s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .back-btn {
+            background: linear-gradient(to bottom, #ff6699, #ff3377);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 102, 153, 0.4);
+            margin-top: 20px;
+        }
+        
+        .back-btn:hover {
+            background: linear-gradient(to bottom, #ff3377, #ff0066);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 102, 153, 0.6);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .message-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts"></div>
+    <div class="container">
+        <h1><i class="fas fa-heart"></i> 教师节祝福 <i class="fas fa-heart"></i></h1>
+        
+        <div class="teacher-name" id="teacher-name"></div>
+        
+        <div class="message-container">
+            <div class="message" id="teacher-message"></div>
+        </div>
+        
+        <button class="back-btn" onclick="window.close()">返回</button>
+    </div>
+
+    <script>
+        // 创建漂浮爱心背景
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 25; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.transform = `scale(${Math.random() * 0.7 + 0.5})`;
+            heartsContainer.appendChild(heart);
+        }
+        
+        // 老师信息数据
+        const teachers = {
+            '何': {
+                name: '语文何老师',
+                gender: '男',
+                message: '亲爱的何老师，感谢您用生动的语言为我们打开文学的大门，您对古诗词的精彩讲解让我们领略到中华文化的博大精深。您的课堂总是充满智慧和趣味，让我们在快乐中学习成长。教师节快乐！'
+            },
+            '王数学': {
+                name: '数学王老师',
+                gender: '女',
+                message: '尊敬的王老师，感谢您用严谨的逻辑和耐心的指导带领我们探索数学的奥秘，您总是能让复杂的公式变得简单易懂。您的教诲如明灯，照亮我们前行的道路。教师节快乐！'
+            },
+            '王体育': {
+                name: '体育王老师',
+                gender: '男',
+                message: '尊敬的王老师，感谢您带领我们在运动中感受快乐，培养团队精神和健康体魄。您的活力感染着每一位同学，让我们明白运动不仅是锻炼身体，更是磨练意志。教师节快乐！'
+            },
+            '韩': {
+                name: '英语韩老师',
+                gender: '男',
+                message: '亲爱的韩老师，感谢您用幽默风趣的方式让英语学习变得生动有趣，您为我们打开了了解世界的一扇窗。您的耐心指导让我们在语言学习中充满信心。教师节快乐！'
+            },
+            '汪': {
+                name: '科学汪老师',
+                gender: '男',
+                message: '尊敬的汪老师，感谢您带领我们探索科学的奥秘，您精心设计的实验让抽象的概念变得直观而有趣。您激发了我们对科学的好奇心和探索精神。教师节快乐！'
+            },
+            '赵': {
+                name: '文综赵老师',
+                gender: '女',
+                message: '亲爱的赵老师，感谢您将历史、地理和政治知识融会贯通，用生动的故事帮助我们理解复杂的社会现象。您的课堂总是引人入胜，让我们受益匪浅。教师节快乐！'
+            },
+            '徐': {
+                name: '美术徐老师',
+                gender: '女',
+                message: '尊敬的徐老师，感谢您教会我们发现美、欣赏美、创造美，您让我们的想象力在艺术的世界里自由翱翔。每一节美术课都是一次美的享受。教师节快乐！'
+            },
+            '任': {
+                name: '音乐任老师',
+                gender: '女',
+                message: '亲爱的任老师，感谢您用美妙的音乐滋润我们的心灵，您教会我们用旋律表达情感，感受艺术的魅力。您的音乐课是我们最期待的时光。教师节快乐！'
+            },
+            '李': {
+                name: '信息技术李老师',
+                gender: '男',
+                message: '尊敬的李老师，感谢您带领我们走进数字世界，掌握现代科技工具，为我们的未来打下坚实基础。您总是耐心解答我们的每一个问题。教师节快乐！'
+            }
+        };
+        
+        // 获取老师信息
+        const teacherKey = localStorage.getItem('teacherKey');
+        const teacher = teachers[teacherKey];
+        
+        // DOM元素
+        const teacherName = document.getElementById('teacher-name');
+        const teacherMessage = document.getElementById('teacher-message');
+        
+        // 显示老师信息
+        if (teacher) {
+            teacherName.textContent = teacher.name;
+            
+            // 逐字显示消息
+            typeMessage(teacher.message, teacherMessage, 40);
+        } else {
+            teacherName.textContent = '老师';
+            teacherMessage.textContent = '感谢您一直以来的辛勤付出和无私奉献！教师节快乐！';
+        }
+        
+        // 逐字显示函数
+        function typeMessage(message, element, speed = 50) {
+            element.innerHTML = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < message.length) {
+                    element.innerHTML += message.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(timer);
+                    // 显示光标
+                    element.innerHTML += '<span class="typed-cursor">|</span>';
+                }
+            }, speed);
+        }
+    </script>
+</body>
+</html>
