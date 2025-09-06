@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教师节感恩祝福</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #ffe6f2, #ffcce6);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.7;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6699'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E") no-repeat center center;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-30px) rotate(20deg) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 700px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #ffb3d9;
+            border-radius: 25px;
+            z-index: -1;
+            animation: borderGlow 3s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 102, 153, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 25px rgba(255, 102, 153, 0.8);
+            }
+        }
+        
+        h1 {
+            color: #ff6699;
+            margin-bottom: 25px;
+            font-size: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #ff6699, transparent);
+        }
+        
+        .input-container {
+            margin: 25px 0;
+            transition: all 0.5s ease;
+        }
+        
+        input {
+            padding: 15px 20px;
+            border: 2px solid #ffb3d9;
+            border-radius: 10px;
+            font-size: 18px;
+            width: 250px;
+            margin-right: 15px;
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        input:focus {
+            border-color: #ff6699;
+            box-shadow: 0 0 10px rgba(255, 102, 153, 0.5);
+        }
+        
+        button {
+            background: linear-gradient(to bottom, #ff6699, #ff3377);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 102, 153, 0.4);
+        }
+        
+        button:hover {
+            background: linear-gradient(to bottom, #ff3377, #ff0066);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(255, 102, 153, 0.6);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .teacher-info {
+            margin-top: 40px;
+            padding: 30px;
+            display: none;
+            position: relative;
+            text-align: center;
+            transition: all 0.5s ease;
+            max-width: 90%;
+            margin: 40px auto 0;
+        }
+        
+        /* 大信封样式 */
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: linear-gradient(to bottom, #fffafc, #fff5f9);
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px solid #ffb3d9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .envelope:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,179,217,0.1) 100%);
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 40px;
+            background: linear-gradient(to bottom, #ffb3d9, #ff99c8);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .envelope:hover .envelope-flap {
+            height: 30px;
+            top: -25px;
+            transform: translateX(-50%) rotateX(180deg);
+        }
+        
+        .stamp {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 60px;
+            height: 60px;
+            background: #ff6699;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            transform: rotate(15deg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+        
+        .stamp::before {
+            content: '感恩教师节';
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .envelope-content {
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .teacher-name {
+            color: #ff6699;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .envelope-message {
+            color: #888;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .error {
+            color: #ff3366;
+            margin-top: 15px;
+            display: none;
+            font-size: 16px;
+            background: rgba(255, 102, 153, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff3366;
+        }
+        
+        .subject-select {
+            margin: 20px 0;
+            display: none;
+            transition: all 0.5s ease;
+        }
+        
+        select {
+            padding: 12px 15px;
+            border: 2px solid #ffb3d9;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 200px;
+            margin-right: 10px;
+            outline: none;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #ff6699;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            input {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .envelope {
+                width: 280px;
+                height: 200px;
+            }
+            
+            .envelope-flap {
+                width: 280px;
+            }
+            
+            .input-group {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts"></div>
+    <div class="container">
+        <h1><i class="fas fa-heart"></i> 教师节感恩祝福 <i class="fas fa-heart"></i></h1>
+        
+        <div class="input-container" id="input-container">
+            <p>请输入老师的姓氏：</p>
+            <div class="input-group">
+                <input type="text" id="surname-input" placeholder="请输入姓氏">
+                <button id="submit-btn">确认</button>
+            </div>
+            <div class="error" id="error-msg">请输入正确的姓氏！</div>
+        </div>
+        
+        <div class="subject-select" id="subject-select">
+            <p>请选择科目：</p>
+            <div class="input-group">
+                <select id="subject-options">
+                    <option value="math">数学王老师</option>
+                    <option value="pe">体育王老师</option>
+                </select>
+                <button id="confirm-subject">确认</button>
+            </div>
+        </div>
+        
+        <div class="teacher-info" id="teacher-info">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="stamp"></div>
+                <div class="envelope-content">
+                    <div class="teacher-name" id="teacher-name"></div>
+                    <div class="envelope-message">点击信封查看祝福语</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            感恩有您，教师节快乐！
+        </div>
+    </div>
+
+    <script>
+        // 创建漂浮爱心背景
+        const heartsContainer = document.getElementById('hearts');
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.transform = `scale(${Math.random() * 0.7 + 0.5})`;
+            heartsContainer.appendChild(heart);
+        }
+        
+        // 老师信息数据
+        const teachers = {
+            '何': {
+                name: '语文何老师',
+                gender: '男',
+                message: '亲爱的何老师，感谢您用生动的语言为我打开文学的大门。您的课堂总是幽默风趣，让我在快乐中学习成长。您对我的教导，我必然会铭记于心，一定会努力在八年级“走人”。祝您教师节快乐！'
+            },
+            '王数学': {
+                name: '数学王老师',
+                gender: '女',
+                message: '亲爱的王老师，祝您的快乐像一条射线，只有起点，没有终点；愿您的幸福像y=x²的函数图像，永远向上延长。祝您教师节快乐！'
+            },
+            '王体育': {
+                name: '体育王老师',
+                gender: '男',
+                message: '尊敬的王老师，感谢您在操场上带着我们挥洒汗水，不仅锻炼了我的体魄，更教会我坚持和拼搏的体育精神。祝您教师节快乐，活力无限！'
+            },
+            '韩': {
+                name: '英语韩老师',
+                gender: '男',
+                message: 'Dear Teacher Han,thank you for all the lessons that you taught me "perfect" is not just a tense, but also a goal. Wishing you a perfect Teachers' day!'
+            },
+            '汪': {
+                name: '科学汪老师',
+                gender: '男',
+                message: '亲爱的汪老师，感谢您让我看到自然的奥妙，物理化学之美，也让我的成绩有所提高。祝您教师节快乐，生活如化学反应一样绚丽多彩！'
+            },
+            '赵': {
+                name: '文综赵老师',
+                gender: '女',
+                message: '亲爱的赵老师，感谢您将历史、地理和政治知识融会贯通，用生动的比喻帮助我们理解复杂的社会现象、历史史实、地理奥秘。祝您教师节快乐！'
+            },
+            '徐': {
+                name: '美术徐老师',
+                gender: '女',
+                message: '尊敬的徐老师，感谢您教会我发现美、欣赏美、创造美，您让我们的想象力在艺术的世界里自由翱翔。祝您教师节快乐！'
+            },
+            '任': {
+                name: '音乐任老师',
+                gender: '女',
+                message: '亲爱的任老师，感谢您用音乐滋润心灵，用旋律唤醒我们内心的想象力，您课前的听歌时间更是让人沉迷。祝您教师节快乐！'
+            },
+            '李': {
+                name: '信息技术李老师',
+                gender: '男',
+                message: 'cout << "感谢您，为我打开了编程世界的大门，您的教诲，让我的知识Day++"//祝您教师节快乐,生活永远0 error'
+            }
+        };
+        
+        // 正确的姓氏列表
+        const validSurnames = ['何', '王', '韩', '汪', '赵', '徐', '任', '李'];
+        
+        // DOM元素
+        const surnameInput = document.getElementById('surname-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const errorMsg = document.getElementById('error-msg');
+        const subjectSelect = document.getElementById('subject-select');
+        const subjectOptions = document.getElementById('subject-options');
+        const confirmSubjectBtn = document.getElementById('confirm-subject');
+        const teacherInfo = document.getElementById('teacher-info');
+        const teacherName = document.getElementById('teacher-name');
+        const envelope = document.getElementById('envelope');
+        const inputContainer = document.getElementById('input-container');
+        
+        let currentSurname = '';
+        let currentTeacherKey = '';
+        
+        // 提交姓氏
+        submitBtn.addEventListener('click', () => {
+            currentSurname = surnameInput.value.trim();
+            
+            if (validSurnames.includes(currentSurname)) {
+                if (currentSurname === '王') {
+                    // 显示科目选择
+                    subjectSelect.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                } else {
+                    inputContainer.classList.add('hidden');
+                    setTimeout(() => {
+                        inputContainer.style.display = 'none';
+                        showTeacherInfo(currentSurname);
+                    }, 500);
+                }
+            } else {
+                errorMsg.style.display = 'block';
+                // 抖动效果
+                surnameInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    surnameInput.style.animation = '';
+                }, 500);
+            }
+        });
+        
+        // 确认科目选择
+        confirmSubjectBtn.addEventListener('click', () => {
+            const subject = subjectOptions.value;
+            subjectSelect.classList.add('hidden');
+            setTimeout(() => {
+                subjectSelect.style.display = 'none';
+                showTeacherInfo(currentSurname + (subject === 'math' ? '数学' : '体育'));
+            }, 500);
+        });
+        
+        // 显示老师信息
+        function showTeacherInfo(key) {
+            const teacher = teachers[key];
+            if (teacher) {
+                currentTeacherKey = key;
+                teacherName.textContent = teacher.name;
+                teacherInfo.style.display = 'block';
+                
+                // 添加一些庆祝效果
+                addCelebrationEffects();
+            }
+        }
+        
+        // 添加庆祝效果
+        function addCelebrationEffects() {
+            // 添加更多爱心
+            for (let i = 0; i < 10; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.animation = `float ${6 + Math.random() * 4}s infinite ease-in-out`;
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        
+        // 信封点击事件 - 打开祝福页面
+        envelope.addEventListener('click', () => {
+            // 保存老师信息到本地存储，以便祝福页面使用
+            localStorage.setItem('teacherKey', currentTeacherKey);
+            
+            // 打开祝福页面
+            window.open('/blessing/', '_blank');
+        });
+        
+        // 按Enter键提交
+        surnameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+        
+        // 添加抖动动画
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
